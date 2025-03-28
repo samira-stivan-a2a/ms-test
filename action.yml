@@ -192,28 +192,28 @@ runs:
 
         # Send the notification
         PAYLOAD=$(cat <<EOF
-      {"type": "message",
-        "attachments": [
-          {
-            "contentType": "application/vnd.microsoft.card.adaptive",
-            "content": {
-              "type": "AdaptiveCard",	
-              "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-              "version": "1.3",
-              "body": [
-                {
-                    "type": "TextBlock",
-                    "text": "$TITLE_ESCAPED"
-                },
-                {
-                    "type": "TextBlock",
-                    "text": "$MESSAGE_ESCAPED",
-                }
-              ]
+        {"type": "message",
+          "attachments": [
+            {
+              "contentType": "application/vnd.microsoft.card.adaptive",
+              "content": {
+                "type": "AdaptiveCard",	
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.3",
+                "body": [
+                  {
+                      "type": "TextBlock",
+                      "text": "$TITLE_ESCAPED"
+                  },
+                  {
+                      "type": "TextBlock",
+                      "text": "$MESSAGE_ESCAPED",
+                  }
+                ]
+              }
             }
+          ]
           }
-        ]
-        }
         EOF
         )
         curl -H "Content-Type: application/json" -d "$PAYLOAD" "$TEAMS_WEBHOOK_URL"
