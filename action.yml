@@ -192,42 +192,27 @@ runs:
 
         # Send the notification
         PAYLOAD=$(cat <<EOF
-        
-        {
-          "type": "message",
-          "attachments": [{
+      {"type": "message",
+        "attachments": [
+          {
             "contentType": "application/vnd.microsoft.card.adaptive",
             "content": {
-              "type": "AdaptiveCard",
-              "version": "1.2",
+              "type": "AdaptiveCard",	
+              "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+              "version": "1.3",
               "body": [
                 {
-                  "type": "TextBlock",
-                  "size": "Medium",
-                  "weight": "Bolder",
-                  "text": "$TITLE_ESCAPED"
+                    "type": "TextBlock",
+                    "text": "$TITLE_ESCAPED"
                 },
                 {
-                  "type": "TextBlock",
-                  "text": "$MESSAGE_ESCAPED",
-                  "wrap": true
-                },
-                {
-                  "type": "Image",
-                  "url": "$IMAGE"
+                    "type": "TextBlock",
+                    "text": "$MESSAGE_ESCAPED",
                 }
-              ]$(if [ -n "$URL" ]; then
-                echo ',
-              "actions": [
-                {
-                  "type": "Action.OpenUrl",
-                  "title": "'"$BUTTON_TEXT"'",
-                  "url": "'"$URL_ESCAPED"'"
-                }
-              ]';
-              fi)
+              ]
             }
-          }]
+          }
+        ]
         }
         EOF
         )
